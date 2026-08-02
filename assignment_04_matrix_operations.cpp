@@ -62,6 +62,119 @@
 
 #include <iostream>
 #include <iomanip>
-#include <string>
 using namespace std;
+
+const int MAX = 10;
+
+// Function to display a matrix
+void displayMatrix(int matrix[MAX][MAX], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << setw(4) << matrix[i][j];
+        }
+        cout << endl;
+    }
+}
+
+// Part A — Transpose a Matrix
+void transposeMatrix(int matrix[MAX][MAX], int rows, int cols) {
+    int transposed[MAX][MAX];
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+
+    cout << "\nTransposed Matrix:\n";
+    displayMatrix(transposed, cols, rows);
+}
+
+// Part B — Add Two Matrices
+void addMatrices(int A[MAX][MAX], int B[MAX][MAX], int rows, int cols) {
+    int sum[MAX][MAX];
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            sum[i][j] = A[i][j] + B[i][j];
+        }
+    }
+
+    cout << "\nSum of Matrices:\n";
+    displayMatrix(sum, rows, cols);
+}
+
+// Part C — Multiply Two Matrices
+void multiplyMatrices(int A[MAX][MAX], int B[MAX][MAX], int rowsA, int colsA, int colsB) {
+    int product[MAX][MAX] = {0};
+    for (int i = 0; i < rowsA; i++) {
+        for (int j = 0; j < colsB; j++) {
+            for (int k = 0; k < colsA; k++) {
+                product[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+
+    cout << "\nProduct of Matrices:\n";
+    displayMatrix(product, rowsA, colsB);
+}
+
+int main() {
+    int M, N, P;
+    int A[MAX][MAX], B[MAX][MAX];
+
+    // Part A — Transpose
+    cout << "Enter number of rows for Matrix A: ";
+    cin >> M;
+    cout << "Enter number of columns for Matrix A: ";
+    cin >> N;
+
+    if (M <= 0 || N <= 0 || M > MAX || N > MAX) {
+        cout << "Error: Invalid matrix size." << endl;
+        return 0;
+    }
+
+    cout << "Enter elements of Matrix A:\n";
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            cout << "Element [" << i << "][" << j << "]: ";
+            cin >> A[i][j];
+        }
+    }
+
+    cout << "\nOriginal Matrix:\n";
+    displayMatrix(A, M, N);
+    transposeMatrix(A, M, N);
+
+    // Part B — Add Two Matrices
+    cout << "\nEnter elements of Matrix B (same size as A):\n";
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            cout << "Element [" << i << "][" << j << "]: ";
+            cin >> B[i][j];
+        }
+    }
+
+    addMatrices(A, B, M, N);
+
+    // Part C — Multiply Two Matrices
+    cout << "\nEnter number of columns for Matrix B (for multiplication): ";
+    cin >> P;
+
+    if (P <= 0 || P > MAX) {
+        cout << "Error: Invalid matrix size." << endl;
+        return 0;
+    }
+
+    cout << "Enter elements of Matrix B (size " << N << " x " << P << "):\n";
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < P; j++) {
+            cout << "Element [" << i << "][" << j << "]: ";
+            cin >> B[i][j];
+        }
+    }
+
+    multiplyMatrices(A, B, M, N, P);
+
+    return 0;
+}
+
 

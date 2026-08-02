@@ -73,3 +73,144 @@
 #include <cmath>
 using namespace std;
 
+// Addition
+double add(double a, double b) {
+    return a + b;
+}
+
+// Subtraction
+double subtract(double a, double b) {
+    return a - b;
+}
+
+// Multiplication
+double multiply(double a, double b) {
+    return a * b;
+}
+
+// Division
+double divide(double a, double b) {
+    if (b == 0) {
+        cout << "Error: Cannot divide by zero." << endl;
+        return NAN; // Not a Number
+    }
+    return a / b;
+}
+
+// Modulus
+int modulus(int a, int b) {
+    if (b == 0) {
+        cout << "Error: Cannot perform modulus with zero." << endl;
+        return 0;
+    }
+    return a % b;
+}
+
+// Exponentiation
+double exponentiate(double base, int exp) {
+    return pow(base, exp);
+}
+
+// Display menu
+void displayMenu() {
+    cout << "\n============================" << endl;
+    cout << "       SIMPLE CALCULATOR     " << endl;
+    cout << "============================" << endl;
+    cout << "1. Addition" << endl;
+    cout << "2. Subtraction" << endl;
+    cout << "3. Multiplication" << endl;
+    cout << "4. Division" << endl;
+    cout << "5. Modulus" << endl;
+    cout << "6. Exponentiation" << endl;
+    cout << "7. Quit" << endl;
+    cout << "Select an operation (1-7): ";
+}
+
+int main() {
+    int choice;
+    double num1, num2;
+
+    do {
+        displayMenu();
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter first number : ";
+                cin >> num1;
+                cout << "Enter second number: ";
+                cin >> num2;
+                cout << fixed << setprecision(2);
+                cout << "Result: " << num1 << " + " << num2 << " = " << add(num1, num2) << endl;
+                break;
+
+            case 2:
+                cout << "Enter first number : ";
+                cin >> num1;
+                cout << "Enter second number: ";
+                cin >> num2;
+                cout << fixed << setprecision(2);
+                cout << "Result: " << num1 << " - " << num2 << " = " << subtract(num1, num2) << endl;
+                break;
+
+            case 3:
+                cout << "Enter first number : ";
+                cin >> num1;
+                cout << "Enter second number: ";
+                cin >> num2;
+                cout << fixed << setprecision(2);
+                cout << "Result: " << num1 << " * " << num2 << " = " << multiply(num1, num2) << endl;
+                break;
+
+            case 4:
+                cout << "Enter first number : ";
+                cin >> num1;
+                cout << "Enter second number: ";
+                cin >> num2;
+                if (num2 == 0) {
+                    cout << "Error: Cannot divide by zero." << endl;
+                } else {
+                    cout << fixed << setprecision(2);
+                    cout << "Result: " << num1 << " / " << num2 << " = " << divide(num1, num2) << endl;
+                }
+                break;
+
+            case 5: {
+                int int1, int2;
+                cout << "Enter first integer : ";
+                cin >> int1;
+                cout << "Enter second integer: ";
+                cin >> int2;
+                if (int2 == 0) {
+                    cout << "Error: Cannot perform modulus with zero." << endl;
+                } else {
+                    cout << "Result: " << int1 << " % " << int2 << " = " << ::modulus(int1, int2) << endl;
+                }
+                break;
+            }
+
+            case 6: {
+                double base;
+                int exp;
+                cout << "Enter base number     : ";
+                cin >> base;
+                cout << "Enter exponent (int)  : ";
+                cin >> exp;
+                cout << fixed << setprecision(2);
+                cout << "Result: " << base << " ^ " << exp << " = " << exponentiate(base, exp) << endl;
+                break;
+            }
+
+            case 7:
+                cout << "Goodbye!" << endl;
+                break;
+
+            default:
+                cout << "Error: Invalid choice. Please select 1-7." << endl;
+        }
+    } while (choice != 7);
+
+    return 0;
+}
+
+
